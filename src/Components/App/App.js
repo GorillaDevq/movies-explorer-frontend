@@ -1,36 +1,39 @@
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import AuthForm from '../AuthForm/AuthForm';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
+import NotFound from '../NotFound/NotFound';
 
 
 
 export default function App() {
+  const [loggedIn, isLoggedIn] = useState(true)
+
   return (
     <Routes>
       <Route path='/' element={
         <ProtectedRoute element={
           <>
-            <Header />
+            <Header loggedIn={loggedIn} />
             <Main />
             <Footer />
           </>
         }/>
       }/>
-      <Route path='/signin' element={
+      <Route path='/movies' element={
         <>
-          <AuthForm />
+          <Header loggedIn={loggedIn} />
+          <Footer />
         </>
       }/>
-      <Route path='/signup' element={
-        <>
-          <AuthForm />
-        </>
-      }/>
+      <Route path='/signin' element={ <AuthForm /> }/>
+      <Route path='/signup' element={ <AuthForm /> }/>
+      <Route path='*' element={ <NotFound /> }/>
+
     </Routes>
   );
 };

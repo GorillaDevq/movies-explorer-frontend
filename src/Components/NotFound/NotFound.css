@@ -1,0 +1,36 @@
+@import url(../../utils/keyframes/colorShift.css);
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.not-found__title {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 170px;
+  margin: 0;
+}
+
+.not-found__subtitle {
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.not-found__link {
+  align-self: center;
+  text-decoration: none;
+  color: #4285F4;
+  transition: all 0.3s ease-in-out;
+  margin-top: 180px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.not-found__link:hover {
+  animation: colorShift 1.5s infinite;
+}
