@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import AuthForm from '../AuthForm/AuthForm';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import NotFound from '../NotFound/NotFound';
-
+import SearchForm from '../SearchForm/SearchForm';
 
 
 export default function App() {
@@ -27,6 +27,7 @@ export default function App() {
       <Route path='/movies' element={
         <>
           <Header loggedIn={loggedIn} />
+          <SearchForm />
           <Footer />
         </>
       }/>
