@@ -8,6 +8,12 @@
 .navbar__item {
   background: #303030;
   border-radius: 10px;
+  border: 2px solid #303030;
+}
+
+.navbar__item:hover {
+  background: #202020;
+  border: 2px solid white;
 }
 
 .navbar__item:not(:last-of-type) {

@@ -13,3 +13,8 @@
   margin-right: 44px;
 }
 
+@media screen and (max-width: 768px) {
+  .header {
+    width: 92.2%;
+  }
+}

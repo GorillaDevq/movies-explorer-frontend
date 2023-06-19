@@ -65,6 +65,22 @@
   line-height: 17px;
 }
 
+.form__input_active {
+  color: #EE3465;
+}
+
+.form__error {
+  display: none;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  margin-top: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form__error_active {
+  display: block;
+}
 
 .form__submit {
   margin-top: auto;

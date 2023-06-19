@@ -5,8 +5,8 @@
 @import url(./vendor/fonts/fonts.css);
 
 /*Подключаем wrapper*/
-@import url(./Components/Wrapper/Wrapper.css);
+@import url(./utils/stylesheet/Wrapper.css);
 
 /*Подключаем root*/
-@import url(./Components//Wrapper/Root.css);
+@import url(./utils/stylesheet/Root.css);
 

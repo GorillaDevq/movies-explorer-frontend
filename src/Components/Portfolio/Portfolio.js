@@ -7,15 +7,15 @@ export default function Portfolio() {
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
           <p className='portfolio__paragraph'>Статичный сайт</p>
-          <a className='portfolio__link' href='https://github.com/GorillaDevq' target='_blank' rel='noreferrer'>&#8599;</a>
+          <a className='portfolio__link' href='https://github.com/GorillaDevq/how-to-learn' target='_blank' rel='noreferrer'>&#8599;</a>
         </li>
         <li className='portfolio__item'>
           <p className='portfolio__paragraph'>Адаптивный сайт</p>
-          <a className='portfolio__link' href='https://github.com/GorillaDevq' target='_blank' rel='noreferrer'>&#8599;</a>
+          <a className='portfolio__link' href='https://github.com/GorillaDevq/russian-travel' target='_blank' rel='noreferrer'>&#8599;</a>
         </li>
         <li className='portfolio__item'>
           <p className='portfolio__paragraph'>Одностраничное приложение</p>
-          <a className='portfolio__link' href='https://github.com/GorillaDevq' target='_blank' rel='noreferrer'>&#8599;</a>
+          <a className='portfolio__link' href='https://github.com/GorillaDevq/react-mesto-api-full-gha' target='_blank' rel='noreferrer'>&#8599;</a>
         </li>
       </ul>
     </section>

@@ -13,11 +13,11 @@ export default function Profile() {
       <form className='profile__form'>
         <fieldset className='profile__field'>
           <label className='profile__label'>Имя</label>
-          <input type='text' className='profile__input' value={name} onChange={(evt) => setName(evt.target.value)}/>
+          <input type='text' className='profile__input' value={name} onChange={(evt) => setName(evt.target.value)} required/>
         </fieldset>
         <fieldset className='profile__field'>
           <label className='profile__label'>E-mail</label>
-          <input type='text' className='profile__input' value={email} onChange={(evt) => setEmail(evt.target.value)}/>
+          <input type='text' className='profile__input' value={email} onChange={(evt) => setEmail(evt.target.value)} required/>
         </fieldset>
         <button type='submit' className='profile__submit'>Редактировать</button>
       </form>

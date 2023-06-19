@@ -44,7 +44,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: minmax(90px, 228px) minmax(170px, 912px);
+  grid-template-columns: 228px 1fr;
 }
 
 .date-list__title {
@@ -72,4 +72,24 @@
 .date-list__title_type_green {
   background: #3DDC84;
   color: black;
+}
+
+@media screen and (max-width: 1024px) {
+  .about-project {
+    width: 87%;
+    padding: 90px 0;
+  }
+
+  .info-list {
+    padding-bottom: 90px;
+  }
+
+  .info-list__paragraph {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .date-list {
+    grid-template-columns: 140px 1fr;
+  }
 }

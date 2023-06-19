@@ -16,15 +16,18 @@ export default function AuthForm() {
             <li className='form__item'>
               <label className='form__label'>Имя</label>
               <input className='form__input' type='text' required/>
+              <span className='form__error'>Что-то пошло не так...</span>
             </li> : null
           }
           <li className='form__item'>
             <label className='form__label'>Email</label>
             <input className='form__input' type='email' required/>
+            <span className='form__error'>Что-то пошло не так...</span>
           </li>
           <li className='form__item'>
-            <label className='form__label' type='password'>Пароль</label>
-            <input className='form__input'/>
+            <label className='form__label'>Пароль</label>
+            <input className='form__input form__input_active' type='password' required/>
+            <span className='form__error form__error_active'>Что-то пошло не так...</span>
           </li>
         </ul>
         <button className='form__submit' type='submit' >Войти</button>

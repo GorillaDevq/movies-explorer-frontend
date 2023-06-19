@@ -18,7 +18,7 @@ export default function App() {
   return (
     <Routes>
       <Route path='/' element={
-        <ProtectedRoute element={
+        <ProtectedRoute isLoggedIn={true} element={
           <>
             <Header loggedIn={loggedIn} />
             <Main />
@@ -51,7 +51,6 @@ export default function App() {
       <Route path='/signin' element={ <AuthForm /> }/>
       <Route path='/signup' element={ <AuthForm /> }/>
       <Route path='*' element={ <NotFound /> }/>
-
     </Routes>
   );
 };
