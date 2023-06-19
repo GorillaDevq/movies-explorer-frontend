@@ -1,20 +1,25 @@
+import { useLocation } from 'react-router-dom'
 import './MoviesCard.css'
 import React from 'react'
-export default function MoviesCard() {
+export default function MoviesCard({ movie }, ...props) {
+  const location = useLocation();
   const [like, setLike] = React.useState(false)
 
   return (
-    <div className='movie'>
-      <img alt='Фильм' src={'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album'}/>
+    <div className={`movie ${location.pathname === '/saved-movies' ? 'movie_active' : null}`}>
+      <img alt={movie.alt} src={movie.src}/>
       <ul className='movie__info'>
         <li className='movie__item'>
-          <h2 className='movie__title'>Киноальманах «100 лет дизайна»</h2>
+          <h2 className='movie__title'>{movie.title}</h2>
         </li>
         <li className='movie__item'>
-          <p className='movie__during'>1ч 3м</p>
+          <p className='movie__during'>{movie.during}</p>
         </li>
         <li className='movie__item movie__item_type_like'>
-          <button type='button' className={`movie__like ${like && `movie__like_active`}`} onClick={() => setLike((prevState) => !prevState)}></button>
+          {location.pathname === '/saved-movies'
+            ? <button type='button' className='movie__delete'></button>
+            : <button type='button' className={`movie__like ${like && `movie__like_active`}`} onClick={() => setLike((prevState) => !prevState)}></button>
+          }
         </li>
       </ul>
     </div>

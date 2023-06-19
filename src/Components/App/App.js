@@ -9,10 +9,11 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import NotFound from '../NotFound/NotFound';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Profile from '../Profile/Profile';
 import Preloader from '../Preloader/Preloader';
 
 export default function App() {
-  const [loggedIn, isLoggedIn] = useState(true)
+  const [loggedIn, isLoggedIn] = useState(false)
 
   return (
     <Routes>
@@ -31,6 +32,20 @@ export default function App() {
           <SearchForm />
           <MoviesCardList />
           <Footer />
+        </>
+      }/>
+      <Route path='/saved-movies' element={
+        <>
+          <Header loggedIn={loggedIn} />
+          <SearchForm />
+          <MoviesCardList />
+          <Footer />
+        </>
+      }/>
+      <Route path='/profile' element={
+        <>
+          <Header loggedIn={loggedIn} />
+          <Profile />
         </>
       }/>
       <Route path='/signin' element={ <AuthForm /> }/>

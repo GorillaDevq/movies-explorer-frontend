@@ -1,0 +1,78 @@
+.profile {
+  margin: 74px 0 70px 0;
+}
+
+.profile__title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.profile__form {
+  width: 410px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__field {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.profile__field:not(:last-of-type) {
+  border-bottom: 1px solid #424242;
+}
+
+.profile__label {
+  position: absolute;
+  top: 16px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.profile__input {
+  background: #202020;
+  border: none;
+  outline: none;
+  text-align: end;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  color: white;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.profile__submit {
+  border: none;
+  outline: none;
+  background: 0;
+  color: white;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.profile__submit:hover {
+  opacity: 0.7;
+}
+
+.profile__link {
+  display: block;
+  color: #EE3465;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.profile__link:hover {
+  opacity: 0.7;
+}

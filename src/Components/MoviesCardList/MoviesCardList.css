@@ -7,5 +7,31 @@
   grid-template-rows: repeat(auto-fill, minmax(237px, 281px));
   column-gap: 24px;
   row-gap: 37px;
-  padding: 70px 0 0 0;
+  padding: 70px 0 10px 0;
+}
+
+.movies-render {
+  width: 89%;
+  margin: 0 auto;
+  padding: 50px 0 80px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movies-render__button {
+  width: 320px;
+  min-height: 36px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  background: #2F2F2F;
+  color: white;
+}
+
+.movies-render__button:hover {
+  background: #202020;
+  border: 2px solid #2F2F2F;
 }
