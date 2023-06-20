@@ -93,3 +93,48 @@
     grid-template-columns: 140px 1fr;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .article-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+
+  .about-project {
+    padding: 70px 0;
+    width: 284px;
+  }
+
+  .info-list {
+    grid-template-columns: 1fr;
+    row-gap: 56px;
+    padding: 60px 0;
+  }
+
+  .info-list__header {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .info-list__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .date-list {
+    grid-template-columns: 100px 1fr;
+  }
+
+  .date-list__title {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .date-list__subtitle {
+    font-size: 11px;
+    line-height: 13px;
+    padding-top: 10px;
+  }
+}

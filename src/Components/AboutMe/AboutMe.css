@@ -105,3 +105,36 @@
     grid-template-columns: minmax(292px, 600px);
   }
 }
+
+@media screen and (max-width: 425px) {
+  .about-me {
+    padding: 70px 0;
+    width: 292px;
+  }
+
+  .about-me__columns {
+    margin-top: 60px;
+    row-gap: 38px;
+  }
+
+  .about-me__title {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 0;
+  }
+
+  .about-me__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 20px;
+  }
+
+  .about-me__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__item:last-of-type {
+    margin-top: 40px;
+  }
+}

@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.5s ease-in-out;
 }
 
 .promo__title {
@@ -22,6 +23,7 @@
   line-height: 58px;
   padding-top: 160px;
   letter-spacing: -2px;
+  transition: all 0.5s ease-in-out;
 }
 
 @media screen and (max-width: 1024px) {
@@ -34,5 +36,20 @@
     font-size: 40px;
     line-height: 52px;
     max-width: 630px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .promo {
+    margin-top: 14px;
+    min-height: 586px;
+  }
+
+  .promo__title {
+    padding-top: 220px;
+    font-size: 29px;
+    line-height: 37px;
+    max-width: 630px;
+    letter-spacing: -1px;
   }
 }

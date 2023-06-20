@@ -32,3 +32,20 @@
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (max-width: 425px) {
+  .navbar__list {
+    margin-bottom: 17px;
+  }
+
+  .navbar__link {
+    min-width: 82px;
+    min-height: 26px;
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .navbar__item:not(:last-of-type) {
+    margin-right: 6px;
+  }
+}
