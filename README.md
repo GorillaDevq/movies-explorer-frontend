@@ -4,4 +4,5 @@
 
 ### Информация для код-ревью
 
-- Переход по роутам осуществляется через браузерную строку: '/', '/movies', '/saved-movies', '/profile', '/signin', '/signup'.
+- Переход по роутам осуществляется через браузерную строку: '/' '/movies' '/saved-movies' '/profile' '/signin' '/signup'
+- [Ссылка на макет проекта](https://disk.yandex.ru/d/KRY47ESFnmS_kQ)
