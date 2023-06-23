@@ -4,6 +4,11 @@
   overflow: hidden;
 }
 
+.movie__image {
+  width: 100%;
+  height: auto;
+}
+
 .movie__info {
   position: relative;
   list-style: none;
@@ -14,7 +19,7 @@
 .movie__title {
   font-weight: 400;
   font-size: 13px;
-  line-height: 12px;
+  line-height: 16px;
   max-width: 290px;
   margin: 0;
   letter-spacing: 0.8px;
@@ -25,7 +30,7 @@
   font-size: 11px;
   line-height: 13px;
   color: #8B8B8B;
-  margin-top: 15px;
+  margin-top: 17px;
 }
 
 .movie__item_type_like {
@@ -72,4 +77,26 @@
 
 .movie_active:hover .movie__delete {
   opacity: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .movie__info {
+    padding: 12px 14px 14px 14px;
+  }
+  
+  .movie__title {
+    font-size: 11px;
+    line-height: 15px;  
+  }
+
+  .movie__during {
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 14px;
+  }
+
+  .movie__item_type_like {
+    top: 8px;
+    right: 16px;
+  }
 }

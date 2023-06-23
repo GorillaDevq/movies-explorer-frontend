@@ -10,7 +10,7 @@
 }
 
 .checkbox_active {
-  background: white;
+  background: #202020;
 }
 
 .checkbox__container {
@@ -47,4 +47,29 @@
   padding-left: 14px;
   font-size: 13px;
   line-height: 18px;
+}
+
+@media screen and (max-width: 1024px) {
+  .checkbox__container {
+    flex-direction: row-reverse;
+    column-gap: 16px;
+  }
+
+  .checkbox__input {
+    top: 0;
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .checkbox__container {
+    justify-content: center;
+    column-count: 13px;
+  }
+
+  .checkbox__label {
+    font-size: 11px;
+    line-height: 18px;
+    padding: 0;
+  }
 }

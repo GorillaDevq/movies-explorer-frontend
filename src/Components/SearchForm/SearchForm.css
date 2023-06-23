@@ -1,5 +1,5 @@
 .search-form {
-  max-width: 89%;
+  width: 89%;
   margin: 70px auto 48px auto;
   display: flex;
   flex-direction: column;
@@ -40,4 +40,28 @@
   border: 2px solid #4285F4;
 }
 
+@media screen and (max-width: 1024px) {
+  .search-form {
+    width: 92.2%;
+    margin: 79px auto 60px auto;
+  }
 
+  .search-form__input {
+    margin-bottom: 29px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .search-form {
+    margin: 90px auto 51px auto;
+  }
+  .search-form__input {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 41px;
+  }
+
+  .search-form__submit {
+    top: -9px;
+  }
+}

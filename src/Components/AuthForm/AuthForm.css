@@ -15,6 +15,7 @@
 }
 
 .authorization__title {
+  font-weight: 500;
   padding: 40px 0;
   margin: 0;
   font-size: 24px;
@@ -65,6 +66,10 @@
   line-height: 17px;
 }
 
+.form__input:focus {
+  border-bottom: 1px solid white;
+}
+
 .form__input_active {
   color: #EE3465;
 }
@@ -101,6 +106,8 @@
 .form__paragraph {
   text-align: center;
   margin: 16px 0 0 0;
+  font-size: 14px;
+  line-height: 17px;
   color: #8B8B8B;
 }
 
@@ -112,4 +119,36 @@
 
 .form__link:hover {
   animation: colorShift 1.5s infinite;
+}
+
+@media screen and (max-width: 1024px) {
+  .authorization {
+    padding: 232px 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .authorization {
+    width: 260px;
+    padding: 56px 0 30px 0;
+    
+  }
+
+  .form {
+    min-height: 500px;
+  }
+
+  .authorization__logo {
+    align-self: center;
+  }
+
+  .authorization__title {
+    align-self: center;
+    padding: 50px 0 80px 0;
+  }
+
+  .form__paragraph {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

@@ -56,6 +56,10 @@
   line-height: 13px;
 }
 
+.profile__input:focus {
+  border-bottom: 1px solid white;
+}
+
 .profile__submit {
   border: none;
   outline: none;
@@ -64,6 +68,7 @@
   font-size: 13px;
   line-height: 16px;
   margin-bottom: 16px;
+  padding: 0;
 }
 
 .profile__submit:hover {
@@ -82,4 +87,36 @@
 
 .profile__link:hover {
   opacity: 0.7;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile {
+    margin: 236px 0 269px 0;
+  }
+
+  .profile__field:last-of-type {
+    margin-bottom: 192px;
+  }
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile__form {
+    width: 260px;
+  }
+
+  .profile {
+    margin: 70px 0 40px 0;
+  }
+
+  .profile__title {
+    margin-bottom: 80px;
+  }
+
+  .profile__field:last-of-type {
+    margin-bottom: 360px;
+  }
 }
