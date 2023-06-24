@@ -4,8 +4,8 @@ export default function FilterCheckbox() {
   const [isChecked, setIsChecked] = React.useState(false);
 
   return (
-    <div className='checkbox__container'>
-      <label className={`checkbox ${isChecked && `checkbox_active`}`}>
+    <div className='checkbox'>
+      <label className={`checkbox__container ${isChecked && `checkbox__container_active`}`}>
         <input type="checkbox" className='checkbox__input' checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)}/>
         <span className="checkbox__checkmark"></span>
       </label>

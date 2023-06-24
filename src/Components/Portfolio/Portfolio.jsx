@@ -6,16 +6,13 @@ export default function Portfolio() {
       <h3 className='portfolio__header'>Портфолио</h3>
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
-          <p className='portfolio__paragraph'>Статичный сайт</p>
-          <a className='portfolio__link' href='https://github.com/GorillaDevq/how-to-learn' target='_blank' rel='noreferrer'>&#8599;</a>
+          <a className='portfolio__link' href='https://github.com/GorillaDevq/how-to-learn' target='_blank' rel='noreferrer'>Статичный сайт <span className='portfolio__arrow'>&#8599;</span></a>
         </li>
         <li className='portfolio__item'>
-          <p className='portfolio__paragraph'>Адаптивный сайт</p>
-          <a className='portfolio__link' href='https://github.com/GorillaDevq/russian-travel' target='_blank' rel='noreferrer'>&#8599;</a>
+          <a className='portfolio__link' href='https://github.com/GorillaDevq/russian-travel' target='_blank' rel='noreferrer'>Адаптивный сайт <span className='portfolio__arrow'>&#8599;</span></a>
         </li>
         <li className='portfolio__item'>
-          <p className='portfolio__paragraph'>Одностраничное приложение</p>
-          <a className='portfolio__link' href='https://github.com/GorillaDevq/react-mesto-api-full-gha' target='_blank' rel='noreferrer'>&#8599;</a>
+          <a className='portfolio__link' href='https://github.com/GorillaDevq/react-mesto-api-full-gha' target='_blank' rel='noreferrer'>Одностраничное приложение <span className='portfolio__arrow'>&#8599;</span></a>
         </li>
       </ul>
     </section>

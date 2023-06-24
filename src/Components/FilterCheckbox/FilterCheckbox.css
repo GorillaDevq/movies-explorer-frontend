@@ -1,4 +1,4 @@
-.checkbox {
+.checkbox__container {
   display: flex;
   position: relative;
   align-items: center;
@@ -9,11 +9,11 @@
   background: #8B8B8B;
 }
 
-.checkbox_active {
+.checkbox__container_active {
   background: #202020;
 }
 
-.checkbox__container {
+.checkbox {
   display: flex;
   align-items: center;
 }
@@ -50,7 +50,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .checkbox__container {
+  .checkbox {
     flex-direction: row-reverse;
     column-gap: 16px;
   }
@@ -62,7 +62,7 @@
 }
 
 @media screen and (max-width: 425px) {
-  .checkbox__container {
+  .checkbox {
     justify-content: center;
     column-count: 13px;
   }

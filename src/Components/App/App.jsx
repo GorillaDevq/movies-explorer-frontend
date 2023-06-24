@@ -28,7 +28,7 @@ export default function App() {
           isLoading
             ? <Preloader />
             : <>
-                <Header loggedIn={false} />
+                <Header loggedIn={true} />
                 <Main />
                 <Footer />
               </>
@@ -39,8 +39,10 @@ export default function App() {
         <ProtectedRoute isLoggedIn={true} element={
           <>
             <Header loggedIn={true} />
-            <SearchForm />
-            <MoviesCardList more={true} />
+            <main className='content'>
+              <SearchForm />
+              <MoviesCardList more={true} />
+            </main>
             <Footer />
           </>
         }/>
@@ -50,8 +52,10 @@ export default function App() {
         <ProtectedRoute isLoggedIn={true} element={
           <>
             <Header loggedIn={true} />
-            <SearchForm />
-            <MoviesCardList more={false} />
+            <main className='content'>
+              <SearchForm />
+              <MoviesCardList more={false} />
+            </main>
             <Footer />
           </>
         }/>

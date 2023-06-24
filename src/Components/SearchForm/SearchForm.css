@@ -19,6 +19,10 @@
   margin-bottom: 32px;
 }
 
+.search-form__input:focus {
+  border-bottom: 1px solid white;
+}
+
 .search-form__submit {
   position: absolute;
   right: 0;
