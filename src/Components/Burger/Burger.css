@@ -81,14 +81,6 @@
   row-gap: 28px;
 }
 
-.burger__title {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  color: white;
-  margin: 0;
-}
-
 .burger__link {
   text-decoration: none;
   color: white;
