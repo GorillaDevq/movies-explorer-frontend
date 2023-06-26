@@ -1,0 +1,102 @@
+.movie {
+  background: #222222;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.movie__image {
+  width: 100%;
+  height: auto;
+}
+
+.movie__info {
+  position: relative;
+  list-style: none;
+  padding: 16px;
+  margin: 0;
+}
+
+.movie__title {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  max-width: 290px;
+  margin: 0;
+  letter-spacing: 0.8px;
+}
+
+.movie__during {
+  margin: 0;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8B8B8B;
+  margin-top: 17px;
+}
+
+.movie__item_type_like {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+}
+
+.movie__like {
+  border: none;
+  outline: none;
+  background: 0;
+  background-image: url(../../images/like.svg);
+  width: 14px;
+  height: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.movie__like_active {
+  background-image: url(../../images/like_active.svg);
+}
+
+.movie__like:hover {
+  opacity: 0.5;
+}
+
+.movie__delete {
+  border: none;
+  outline: none;
+  background: 0;
+  background-image: url(../../images/delete.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 14px;
+  height: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.movie_active {
+  cursor: pointer;
+}
+
+.movie_active:hover .movie__delete {
+  opacity: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .movie__info {
+    padding: 12px 14px 14px 14px;
+  }
+  
+  .movie__title {
+    font-size: 11px;
+    line-height: 15px;  
+  }
+
+  .movie__during {
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 14px;
+  }
+
+  .movie__item_type_like {
+    top: 8px;
+    right: 16px;
+  }
+}

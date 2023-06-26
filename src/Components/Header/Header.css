@@ -1,0 +1,21 @@
+.header {
+  width: 89%;
+  margin: 0 auto;
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 72px;
+}
+
+.header__logo {
+  margin-right: 44px;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    width: 92.2%;
+    padding: 16px 0;
+  }
+}

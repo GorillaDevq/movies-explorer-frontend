@@ -1,0 +1,67 @@
+@import url(../../utils/keyframes/colorShift.css);
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.not-found__title {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 170px;
+  margin: 0;
+}
+
+.not-found__subtitle {
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.not-found__link {
+  align-self: center;
+  text-decoration: none;
+  color: #4285F4;
+  transition: all 0.3s ease-in-out;
+  margin-top: 180px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.not-found__link:hover {
+  animation: colorShift 1.5s infinite;
+}
+
+@media screen and (max-width: 1024px) {
+  .not-found {
+    padding-top: 360px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .not-found {
+    padding-top: 329px;
+    min-height: inherit;
+  }
+
+  .not-found__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+
+  .not-found__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 10px;
+  }
+
+  .not-found__link {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 284px;
+  }
+}
