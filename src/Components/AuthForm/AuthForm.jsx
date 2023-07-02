@@ -1,5 +1,4 @@
 // Библиотеки реакт
-import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom'
 
 // Кастомные хуки
@@ -9,7 +8,7 @@ import { useEmptyValidation } from '../../utils/hooks/useInputWithValidation';
 // Стили
 import './AuthForm.css'
 
-export default function AuthForm({ handleCheckToken, ...props }) {
+export default function AuthForm(props) {
   const location = useLocation();
 
   const { values, handleChange, errors, isValid } = useFormWithValidation();
@@ -30,10 +29,6 @@ export default function AuthForm({ handleCheckToken, ...props }) {
       props.onSubmit(values)  
     }
   }
-
-  useEffect(() => {
-    handleCheckToken()
-  }, [handleCheckToken])
 
   return (
     <section className='authorization'>

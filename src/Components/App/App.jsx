@@ -16,7 +16,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Profile from '../Profile/Profile';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
-import Preloader from '../Preloader/Preloader';
 
 // Кастомные хуки
 import useWindowInnerWidth from '../../utils/hooks/useWindowInnerWidth';
@@ -34,6 +33,8 @@ export default function App() {
   const location = useLocation();
 
   const [isLoggedIn, setLoggedIn] = useState(false)
+
+  // Стейт для прелоадера
   const [isLoading, setLoading] = useState(false)
 
   // Стейт для попапа
@@ -84,6 +85,7 @@ export default function App() {
   // Получение сохраненных фильмов API
   const showSavedMovieList = useCallback(async () => {
     try {
+      setLoading(true)
       const response = await mainApi.getSavedMovie();
       setSavedMovieList(response);
       localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify(response));
@@ -92,6 +94,8 @@ export default function App() {
       else setVisibleButtonSaved(false);
     } catch(err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   }, [moviesPerRows, setSavedFiltredMovieList, setVisibleButtonSaved])
 
@@ -116,10 +120,13 @@ export default function App() {
   // Сохранение фильма API
   const handleSavedMovie = async (movieData) => {
     try {
+      setLoading(true)
       const response = await mainApi.saveMovie(movieData);
       setSavedMovieList([...savedMovieList, response]);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -167,7 +174,7 @@ export default function App() {
         console.log(err);
       }
     } 
-  }, [isLoggedIn])
+  }, [isLoggedIn, navigate])
 
   // Редактирование профиля API
   const handleUpdateUser = async (userData) => {
@@ -227,17 +234,19 @@ export default function App() {
     handleCheckLogin();
   }, [handleCheckLogin])
 
+  useEffect(() => {
+    handleCheckToken()
+  }, [handleCheckToken])
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
         <Route path='/' element={
-          isLoading
-            ? <Preloader />
-            : <>
-                <Header isLoggedIn={isLoggedIn} />
-                <Main />
-                <Footer />
-              </>
+          <>
+            <Header isLoggedIn={isLoggedIn} />
+            <Main />
+            <Footer />
+          </>
         }/>
         <Route path='/movies' element={
           //Роут - фильмы
@@ -254,6 +263,7 @@ export default function App() {
                 switchLikeMovie={switchLikeMovie}
                 isVisibleButton={isVisibleButtonMovies}
                 storageName={FILTRED_MOVIES}
+                isLoading={isLoading}
                 />
               <Footer />
             </>
@@ -273,6 +283,7 @@ export default function App() {
                 handleShowButton={handleShowButton}
                 isVisibleButton={isVisibleButtonSaved}
                 storageName={FILTRED_SAVED_MOVIES}
+                isLoading={isLoading}
               />
               <Footer />
             </>
@@ -288,8 +299,8 @@ export default function App() {
             </>
           }/>
         }/>
-        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} handleCheckToken={handleCheckToken} /> }/>
-        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} handleCheckToken={handleCheckToken} /> }/>
+        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} /> }/>
+        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} /> }/>
         <Route path='*' element={ <NotFound /> }/>
       </Routes>
     </CurrentUserContext.Provider>
