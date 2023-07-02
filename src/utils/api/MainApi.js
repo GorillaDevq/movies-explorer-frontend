@@ -70,6 +70,6 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi('http://localhost:3000')
+const mainApi = new MainApi('https://api.GDQ.movies-explorer.nomoredomains.monster')
 
 export default mainApi
