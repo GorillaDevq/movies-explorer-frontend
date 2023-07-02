@@ -1,33 +1,48 @@
 import { useLocation } from "react-router-dom"
+import { useEffect } from "react"
 
 import MoviesCard from "../MoviesCard/MoviesCard"
 
 import './MoviesCardList.css'
 
-import { movieList, savedMovies } from '../../utils/constants/constants'
+export default function MoviesCardList({ showMovieList, showSavedMovieList, ...props}) {
+  const location = useLocation();
 
-export default function MoviesCardList(props) {
-  const location = useLocation()
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      showSavedMovieList()
+      showMovieList()
+    } else if (location.pathname === '/saved-movies') {
+      showSavedMovieList()
+    }
+  }, [showMovieList, location.pathname, showSavedMovieList])
+
+  const handleShowButton = () => {
+    props.handleShowButton(props.movieList, props.storageName)
+  }
 
   return (
     <>
-      <section className='movies-list'>
-        {location.pathname === '/movies'
-          ? ( movieList.length > 0
-              ? movieList.map((item, index) => <MoviesCard key={index} movie={item} />)
-              : <h1 className='movies-list__title'>Нет фильмов</h1>
-          )
-          : ( savedMovies.length > 0 
-            ? savedMovies.map((item, index) => <MoviesCard key={index} movie={item}/>)
-            : <h1 className='movies-list__title'>Нет сохраненных фильмов</h1>
-          )
-        }
-      </section>
-      <section className='movies-render'>
-        {props.more &&
-          <button type='button' className='movies-render__button'>Ещё</button>
-        }
-      </section>
+      {props.movieList.length > 0 
+        ? 
+          <>
+            <section className='movies-list'>
+              {props.movieList.map((item) => <MoviesCard key={item.nameRU} 
+                movie={item} 
+                onSave={props.handleSavedMovie} 
+                savedMovieList={props.savedMovieList} 
+                onLike={props.switchLikeMovie} 
+                onDelete={props.handleDeleteMovie}
+              />)}
+            </section>
+            <section className='movies-render'>
+              {props.isVisibleButton &&
+                <button type='button' className='movies-render__button' onClick={handleShowButton}>Ещё</button>
+              }
+            </section>
+          </>
+        : <h1 className='movies-title'>Ничего не найдено</h1>
+      }
     </>
   )
 }

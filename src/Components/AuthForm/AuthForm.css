@@ -10,7 +10,7 @@
   padding: 70px 0;
 }
 
-.authorization__logo {
+.authorization__link {
   align-self: start;
 }
 
@@ -26,6 +26,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   width: 100%;
   flex-grow: 1;
 }
@@ -34,6 +35,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-bottom: auto;
   display: flex;
   flex-direction: column;
 }
@@ -75,7 +77,6 @@
 }
 
 .form__error {
-  display: none;
   font-size: 10px;
   line-height: 12px;
   color: #EE3465;
@@ -83,19 +84,28 @@
   transition: all 0.3s ease-in-out;
 }
 
-.form__error_active {
-  display: block;
+.form__error_type_submit {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .form__submit {
-  margin-top: auto;
   min-height: 45px;
   background: #4285F4;
   border-radius: 3px;
   border: none;
   color: white;
+  cursor: pointer;
   padding: 0;
   transition: all 0.3s ease-in-out;
+}
+
+.form__submit_disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.2);
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  background: white;
 }
 
 .form__submit:hover {

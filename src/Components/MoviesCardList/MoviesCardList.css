@@ -4,7 +4,6 @@
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill,364px);
-  grid-template-rows: repeat(auto-fill, 281px);
   column-gap: 24px;
   row-gap: 37px;
   padding: 70px 0 10px 0;
@@ -38,13 +37,14 @@
   border: 2px solid #2F2F2F;
 }
 
-.movies-list__title {
+.movies-title {
   display: flex;
+  justify-content: center;
+  margin: 25vh 0 15vh 0;
   align-items: center;
   text-align: center;
   font-weight: 500;
   color: #8B8B8B;
-  grid-column: 2;
 }
 
 @media screen and (max-width: 1024px) {
