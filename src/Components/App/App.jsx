@@ -217,7 +217,7 @@ export default function App() {
     try {
       await mainApi.logOut();
       setLoggedIn(false);
-      navigate('/')
+      navigate('/signin')
     } catch (err) {
       console.log(err);
     }
