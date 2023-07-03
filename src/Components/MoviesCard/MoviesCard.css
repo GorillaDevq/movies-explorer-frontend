@@ -19,9 +19,13 @@
 
 .movie__info {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   list-style: none;
   padding: 16px;
   margin: 0;
+  flex-grow: 1;
 }
 
 .movie__title {
@@ -38,7 +42,7 @@
   font-size: 11px;
   line-height: 13px;
   color: #8B8B8B;
-  margin-top: 17px;
+  margin-top: auto;
 }
 
 .movie__item_type_like {

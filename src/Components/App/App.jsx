@@ -164,12 +164,14 @@ export default function App() {
       try {
         await mainApi.checkToken();
         setLoggedIn(true);
-        navigate('/movies');
+        if (location.pathname === '/signin' || location.pathname === '/signup' || location.pathname === '/') {
+          navigate('/movies');
+        }
       } catch(err) {
         console.log(err);
       }
     } 
-  }, [isLoggedIn, navigate])
+  }, [isLoggedIn, navigate, location.pathname])
 
   // Редактирование профиля API
   const handleUpdateUser = async (userData) => {
