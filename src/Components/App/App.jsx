@@ -34,9 +34,6 @@ export default function App() {
 
   const [isLoggedIn, setLoggedIn] = useState(false)
 
-  // Стейт для прелоадера
-  const [isLoading, setLoading] = useState(false)
-
   // Стейт для попапа
   const [isOpen, setOpen] = useState(false)
 
@@ -85,7 +82,6 @@ export default function App() {
   // Получение сохраненных фильмов API
   const showSavedMovieList = useCallback(async () => {
     try {
-      setLoading(true)
       const response = await mainApi.getSavedMovie();
       setSavedMovieList(response);
       localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify(response));
@@ -94,9 +90,7 @@ export default function App() {
       else setVisibleButtonSaved(false);
     } catch(err) {
       console.log(err);
-    } finally {
-      setLoading(false)
-    }
+    } 
   }, [moviesPerRows, setSavedFiltredMovieList, setVisibleButtonSaved])
 
   // Отображение кнопки "Ещё"
@@ -120,13 +114,10 @@ export default function App() {
   // Сохранение фильма API
   const handleSavedMovie = async (movieData) => {
     try {
-      setLoading(true)
       const response = await mainApi.saveMovie(movieData);
       setSavedMovieList([...savedMovieList, response]);
     } catch (err) {
       console.log(err);
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -263,7 +254,6 @@ export default function App() {
                 switchLikeMovie={switchLikeMovie}
                 isVisibleButton={isVisibleButtonMovies}
                 storageName={FILTRED_MOVIES}
-                isLoading={isLoading}
                 />
               <Footer />
             </>
@@ -283,7 +273,6 @@ export default function App() {
                 handleShowButton={handleShowButton}
                 isVisibleButton={isVisibleButtonSaved}
                 storageName={FILTRED_SAVED_MOVIES}
-                isLoading={isLoading}
               />
               <Footer />
             </>
