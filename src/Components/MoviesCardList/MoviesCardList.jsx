@@ -11,7 +11,6 @@ export default function MoviesCardList({ showMovieList, showSavedMovieList, ...p
 
   const isEmptyStorage = localStorage.getItem(props.storageName)
 
-
   useEffect(() => {
     if (location.pathname === '/movies') {
       showSavedMovieList()

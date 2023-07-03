@@ -18,7 +18,7 @@ export default function Profile({ onSetError , ...props}) {
   const isValidName = useEmptyValidation(values.name);  
 
   // Проверка на дупликат данных
-  const isDuplicate = currentUser === values
+  const isDuplicate = (currentUser.name === values.name) && (currentUser.email === values.email)
 
   // Проверка для className 
   const isValidUpdate = isValid && isEmptyEmail && isValidName && (isValidRegex === '') && !isDuplicate
