@@ -229,6 +229,10 @@ export default function App() {
     handleCheckToken()
   }, [handleCheckToken])
 
+  useEffect(() => {
+    setErrorMessage('')
+  }, [])
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
@@ -283,13 +287,13 @@ export default function App() {
           <ProtectedRoute isLoggedIn={isLoggedIn} element={
             <>
               <Header isLoggedIn={isLoggedIn} />
-              <Profile onSubmit={handleUpdateUser} onLogOut={handleLogOut} errorMessage={errorMessage}/>
+              <Profile onSubmit={handleUpdateUser} onLogOut={handleLogOut} errorMessage={errorMessage} onSetError={setErrorMessage}/>
               <SuccessPopup isOpen={isOpen} onClose={handleClosePopup} text={'Вы успешно изменили данные'}/>
             </>
           }/>
         }/>
-        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} /> }/>
-        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} /> }/>
+        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} onSetError={setErrorMessage} /> }/>
+        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} onSetError={setErrorMessage} /> }/>
         <Route path='*' element={ <NotFound /> }/>
       </Routes>
     </CurrentUserContext.Provider>

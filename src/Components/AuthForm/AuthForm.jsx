@@ -1,6 +1,6 @@
 // Библиотеки реакт
 import { Link, useLocation } from 'react-router-dom'
-
+import { useEffect } from 'react';
 // Кастомные хуки
 import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
 import { useEmptyValidation } from '../../utils/hooks/useInputWithValidation';
@@ -8,7 +8,7 @@ import { useEmptyValidation } from '../../utils/hooks/useInputWithValidation';
 // Стили
 import './AuthForm.css'
 
-export default function AuthForm(props) {
+export default function AuthForm({ onSetError, ...props }) {
   const location = useLocation();
 
   const { values, handleChange, errors, isValid } = useFormWithValidation();
@@ -29,6 +29,8 @@ export default function AuthForm(props) {
       props.onSubmit(values)  
     }
   }
+
+  const handleChangeError = () => onSetError('')
 
   return (
     <section className='authorization'>
@@ -67,11 +69,11 @@ export default function AuthForm(props) {
         {location.pathname === '/signin' 
           ? <>
               <button className={`form__submit ${isValidSignIn ? `` : `form__submit_disabled`}`} type='submit'>Войти</button>
-              <p className='form__paragraph'>Ещё не зарегистрированы? <Link to={'/signup'} className='form__link'>Регистрация</Link></p>
+              <p className='form__paragraph'>Ещё не зарегистрированы? <Link to={'/signup'} className='form__link' onClick={handleChangeError}>Регистрация</Link></p>
             </>
           : <>
               <button className={`form__submit ${isValidSignUp ? `` : `form__submit_disabled`}`} type='submit'>Зарегестрироваться</button>
-              <p className='form__paragraph'>Уже зарегистрированы? <Link to={'/signin'} className='form__link'>Войти</Link></p>
+              <p className='form__paragraph'>Уже зарегистрированы? <Link to={'/signin'} className='form__link' onClick={handleChangeError}>Войти</Link></p>
             </>
         }
       </form>

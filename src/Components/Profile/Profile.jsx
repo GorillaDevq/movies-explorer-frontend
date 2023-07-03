@@ -6,7 +6,7 @@ import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
 import { useEmptyValidation, useRegexValidation } from '../../utils/hooks/useInputWithValidation';
 import './Profile.css'
 
-export default function Profile(props) {
+export default function Profile({ onSetError , ...props}) {
   const currentUser = useContext(CurrentUserContext)
   const { values, handleChange, errors, isValid, setValues } = useFormWithValidation();
 
@@ -34,6 +34,10 @@ export default function Profile(props) {
     setValues(currentUser)
   }, [currentUser, setValues])
 
+  useEffect(() => {
+    onSetError('')
+  }, [])
+  
   return (
     <section className='profile'>
       <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
