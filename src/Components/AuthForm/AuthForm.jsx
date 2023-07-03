@@ -1,6 +1,5 @@
 // Библиотеки реакт
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect } from 'react';
 // Кастомные хуки
 import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
 import { useEmptyValidation } from '../../utils/hooks/useInputWithValidation';

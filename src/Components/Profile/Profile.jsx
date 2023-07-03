@@ -36,8 +36,8 @@ export default function Profile({ onSetError , ...props}) {
 
   useEffect(() => {
     onSetError('')
-  }, [])
-  
+  }, [onSetError])
+
   return (
     <section className='profile'>
       <h1 className='profile__title'>Привет, {currentUser.name}!</h1>

@@ -26,7 +26,11 @@ import mainApi from '../../utils/api/MainApi';
 import moviesApi from '../../utils/api/MoviesApi';
 
 // Константы
-import { FILTRED_MOVIES, FILTRED_SAVED_MOVIES } from '../../utils/constants/constants';
+import { 
+  FILTRED_MOVIES, 
+  FILTRED_SAVED_MOVIES,
+  VALIDATION_ERROR_MESSAGE,
+} from '../../utils/constants/constants';
 
 export default function App() {
   const navigate = useNavigate();
@@ -176,7 +180,7 @@ export default function App() {
       setCurrentUser(response);
       setErrorMessage('');
     } catch (err) {
-      if (err.statusCode === 400) setErrorMessage('Некорректно заполнено поле email');
+      if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
     }
   }
@@ -189,7 +193,7 @@ export default function App() {
       setErrorMessage('');
       navigate('/movies', {replace: true});
     } catch (err) {
-      if (err.statusCode === 400) setErrorMessage('Некорректно заполнено поле email');
+      if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
     }
   }
@@ -203,7 +207,7 @@ export default function App() {
       setErrorMessage('');
       navigate('/movies', {replace: true});
     } catch (err) {
-      if (err.statusCode === 400) setErrorMessage('Некорректно заполнено поле email');
+      if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
     }
   }

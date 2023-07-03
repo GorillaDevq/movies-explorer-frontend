@@ -9,6 +9,9 @@ import './MoviesCardList.css'
 export default function MoviesCardList({ showMovieList, showSavedMovieList, ...props}) {
   const location = useLocation();
 
+  const isEmptyStorage = localStorage.getItem(props.storageName)
+
+
   useEffect(() => {
     if (location.pathname === '/movies') {
       showSavedMovieList()
@@ -21,18 +24,16 @@ export default function MoviesCardList({ showMovieList, showSavedMovieList, ...p
   const handleShowButton = () => {
     props.handleShowButton(props.movieList, props.storageName)
   }
-
   return (
     <>
-      {props.isLoading ? (
-        <Preloader />
-      )
-        : (
+      {isEmptyStorage ? 
+        (
           props.movieList.length > 0 
           ? (
               <>
                 <section className='movies-list'>
-                  {props.movieList.map((item) => <MoviesCard key={item.nameRU} 
+                  {props.movieList.map((item) => <MoviesCard 
+                    key={item.nameRU} 
                     movie={item} 
                     onSave={props.handleSavedMovie} 
                     savedMovieList={props.savedMovieList} 
@@ -49,6 +50,9 @@ export default function MoviesCardList({ showMovieList, showSavedMovieList, ...p
             )
           : ( <h1 className='movies-title'>Ничего не найдено</h1> )
           )
+        : (
+          <h1 className='movies-title'>Фильмов нет</h1>
+        )
       }
     </>
   )
