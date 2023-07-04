@@ -8,7 +8,7 @@ import { useEmptyValidation, useRegexNameValidation, useRegexEmailValidation } f
 // Стили
 import './AuthForm.css'
 
-export default function AuthForm({ isProtected, onSetError, ...props }) {
+export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -43,10 +43,10 @@ export default function AuthForm({ isProtected, onSetError, ...props }) {
   const handleChangeError = () => onSetError('')
 
   useEffect(() => {
-    if (isProtected) {
-      navigate(-1)
+    if (isLoggedIn) {
+      navigate('/movies')
     }
-  }, [isProtected, navigate])
+  }, [isLoggedIn, navigate])
 
   return (
     <section className='authorization'>

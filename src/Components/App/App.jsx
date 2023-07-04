@@ -40,7 +40,7 @@ export default function App() {
   const location = useLocation();
 
   const [isLoggedIn, setLoggedIn] = useState(false)
-  const [isProtected, setProtected] = useState(false)
+
   // Стейт для попапа
   const [isOpen, setOpen] = useState(false)
 
@@ -196,7 +196,6 @@ export default function App() {
       setErrorMessage('');
       localStorage.setItem(IS_LOGGED_IN, JSON.stringify(true));
       navigate('/movies', {replace: true});
-      setProtected(true);
     } catch (err) {
       if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
@@ -212,7 +211,6 @@ export default function App() {
       setLoggedIn(true);
       setErrorMessage('');
       navigate('/movies', {replace: true});
-      setProtected(true);
     } catch (err) {
       if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
@@ -225,8 +223,7 @@ export default function App() {
       .then(() => {
         localStorage.clear();
         setLoggedIn(false);
-        setProtected(false);
-        setCurrentUser({});
+        setCurrentUser({})
       })
       .then(() => {
         navigate('/signin');
@@ -250,7 +247,6 @@ export default function App() {
     setErrorMessage('')
     if (localStorage.getItem('isLogedIn')) {
       setLoggedIn(true)
-      setProtected(true)
     }
   }, [])
 
@@ -315,8 +311,8 @@ export default function App() {
             </>
           }/>
         }/>
-        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} onSetError={setErrorMessage} isProtected={isProtected} /> }/>
-        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} onSetError={setErrorMessage} isProtected={isProtected} /> }/>
+        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} onSetError={setErrorMessage} isLoggedIn={isLoggedIn} /> }/>
+        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} onSetError={setErrorMessage} isLoggedIn={isLoggedIn} /> }/>
         <Route path='*' element={ <NotFound isLoggedIn={isLoggedIn} /> }/>
       </Routes>
     </CurrentUserContext.Provider>
