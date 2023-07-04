@@ -6,28 +6,32 @@ import { FILTRED_MOVIES, FILTRED_SAVED_MOVIES, SHORT_FILM_DURATION, NULL_FILM } 
 export default function useSearchMovies(moviesPerRows) {
   const location = useLocation();
 
+  const [isLoading, setLoading] = useState(false)
+
   const [visibleMovieList, setVisibleMovieList] = useState([]);
   const [isVisibleButtonMovies, setVisibleButtonMovies] = useState(false);
 
   const [savedFiltredMovieList, setSavedFiltredMovieList] = useState([]);
   const [isVisibleButtonSaved, setVisibleButtonSaved] = useState(false);
 
-  const handleFilterResult = (filtredMovies) => {
+  const handleFilterResult = (filtredMovies , checkbox) => {
     if (location.pathname === '/movies') {
-      localStorage.setItem(FILTRED_MOVIES, JSON.stringify(filtredMovies));
+      localStorage.setItem(FILTRED_MOVIES, JSON.stringify({movies: filtredMovies, checkbox: checkbox}));
       setVisibleMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows))
       if (filtredMovies.length > moviesPerRows) setVisibleButtonMovies(true);
       else setVisibleButtonMovies(false);
     } else {
-      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify(filtredMovies));
+      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify({movies: filtredMovies, checkbox: checkbox}));
       setSavedFiltredMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows));
       if (filtredMovies.length > moviesPerRows) setVisibleButtonSaved(true);
       else setVisibleButtonSaved(false);
     }
+    setLoading(false)
     return
   }
 
   const handleSearchMovies = (search, checkbox, arrayMovies) => {
+    setLoading(true)
     const searchLowerCase = search.toLowerCase();
     const filtredMovies = arrayMovies.filter((movie) => {
       const movieNameLowerCase = movie.nameRU.toLowerCase();
@@ -38,7 +42,7 @@ export default function useSearchMovies(moviesPerRows) {
         return movieNameLowerCase.includes(searchLowerCase)
       }
     }) 
-    handleFilterResult(filtredMovies)
+    handleFilterResult(filtredMovies, checkbox)
   }
 
   const handleFilterMovies = (arrayMovies, checkbox) => {
@@ -50,7 +54,7 @@ export default function useSearchMovies(moviesPerRows) {
         return movie
       }
     })
-    handleFilterResult(filtredMovies)
+    handleFilterResult(filtredMovies, checkbox)
   }
 
   return { handleSearchMovies, 
@@ -62,6 +66,7 @@ export default function useSearchMovies(moviesPerRows) {
     savedFiltredMovieList,
     setSavedFiltredMovieList,
     isVisibleButtonSaved,
-    setVisibleButtonSaved
+    setVisibleButtonSaved,
+    isLoading
   }
 }

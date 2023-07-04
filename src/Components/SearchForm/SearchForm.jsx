@@ -4,7 +4,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
 
 import './SearchForm.css'
 
-export default function SearchForm(props) {
+export default function SearchForm({storageName ,...props}) {
   const location = useLocation()
 
   const [isChecked, setIsChecked] = useState(false);
@@ -13,9 +13,11 @@ export default function SearchForm(props) {
   const handleChangeInput = (evt) => setSearchValue(evt.target.value);
 
   const handleCheckboxChange = (evt) => {
+    const storage = localStorage.getItem(storageName);
+    const movies = JSON.parse(storage);
     const { checked } = evt.target
     setIsChecked(checked)
-    props.onCheckbox(props.movieListFiltred, checked)
+    props.onCheckbox(movies.movies, checked)
   };
 
   const handleSubmitSearch = (evt) => {
@@ -26,8 +28,13 @@ export default function SearchForm(props) {
   useEffect(() => {
     if (location.pathname) {
       setSearchValue('')
+      const storage = localStorage.getItem(storageName);
+      if (storage) {
+        const movies = JSON.parse(storage);
+        setIsChecked(movies.checkbox)
+      }
     }
-  }, [location.pathname])
+  }, [location.pathname, storageName])
 
   return (
     <form className='search-form' onSubmit={handleSubmitSearch}>

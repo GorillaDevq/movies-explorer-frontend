@@ -66,7 +66,8 @@ export default function App() {
     savedFiltredMovieList,
     setSavedFiltredMovieList,
     isVisibleButtonSaved,
-    setVisibleButtonSaved
+    setVisibleButtonSaved,
+    isLoading,
   } = useSearchMovies(moviesPerRows)
 
   // Получение всех фильмов API
@@ -74,7 +75,7 @@ export default function App() {
     let filtredMovies = localStorage.getItem(FILTRED_MOVIES)
     if (filtredMovies) {
       filtredMovies = JSON.parse(filtredMovies);
-      setVisibleMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows))
+      setVisibleMovieList(filtredMovies.movies.slice(NULL_FILM, moviesPerRows))
       if (filtredMovies.length > moviesPerRows) setVisibleButtonMovies(true);
       else setVisibleButtonMovies(false);
     }
@@ -91,7 +92,7 @@ export default function App() {
     try {
       const response = await mainApi.getSavedMovie();
       setSavedMovieList(response);
-      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify(response));
+      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify({ movies: response, checkbox: false}));
       setSavedFiltredMovieList(response.slice(NULL_FILM, moviesPerRows));
       if (response.length > moviesPerRows) setVisibleButtonSaved(true);
       else setVisibleButtonSaved(false);
@@ -104,15 +105,15 @@ export default function App() {
   const handleShowButton = (arrayMovie, storageMovies) => {
     const currentMoviesLength = arrayMovie.length;
     const filtredMovies =  JSON.parse(localStorage.getItem(storageMovies));
-    const nextMoviesLength = filtredMovies.slice(currentMoviesLength, currentMoviesLength + moviesPerAdd);
+    const nextMoviesLength = filtredMovies.movies.slice(currentMoviesLength, currentMoviesLength + moviesPerAdd);
     if (location.pathname === '/movies') {
       setVisibleMovieList((prevValue) => [...prevValue, ...nextMoviesLength]);
-      if (currentMoviesLength + nextMoviesLength.length >= filtredMovies.length) {
+      if (currentMoviesLength + nextMoviesLength.length >= filtredMovies.movies.length) {
         setVisibleButtonMovies(false);
       }
     } else {
       setSavedFiltredMovieList((prevValue) => [...prevValue, ...nextMoviesLength]);
-      if (currentMoviesLength + nextMoviesLength.length >= filtredMovies.length) {
+      if (currentMoviesLength + nextMoviesLength.length >= filtredMovies.movies.length) {
         setVisibleButtonSaved(false);
       }
     }
@@ -135,7 +136,7 @@ export default function App() {
         setSavedMovieList((state) => state.filter((movie) => movie._id !== res._id));
         setSavedFiltredMovieList((state) => state.filter((movie) => movie._id !== res._id));
       })
-      .then(() => localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify(savedMovieList)))
+      .then(() => localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify({ movies: savedMovieList, checkbox: false})))
       .catch((err) => console.log(err))
   }
 
@@ -206,9 +207,9 @@ export default function App() {
     try {
       delete userData.name;
       await mainApi.signIn(userData);
+      localStorage.setItem(IS_LOGGED_IN, JSON.stringify(true));
       setLoggedIn(true);
       setErrorMessage('');
-      localStorage.setItem(IS_LOGGED_IN, JSON.stringify(true));
       navigate('/movies', {replace: true});
     } catch (err) {
       if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
@@ -217,18 +218,21 @@ export default function App() {
   }
 
   // Выход API
-  const handleLogOut = async () => {
-    try {
-      await mainApi.logOut();
-      setLoggedIn(false);
-      localStorage.removeItem(IS_LOGGED_IN);
-      localStorage.removeItem(FILTRED_MOVIES);
-      localStorage.removeItem(FILTRED_SAVED_MOVIES);
-      setCurrentUser({})
-      navigate('/signin', { replace: true });
-    } catch (err) {
-      console.log(err);
-    }
+  const handleLogOut = () => {
+    mainApi.logOut()
+      .then(() => {
+        localStorage.removeItem(IS_LOGGED_IN);
+        localStorage.removeItem(FILTRED_MOVIES);
+        localStorage.removeItem(FILTRED_SAVED_MOVIES);
+        setLoggedIn(false);
+        setCurrentUser({})
+      })
+      .then(() => {
+        navigate('/signin', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const handleClosePopup = () => setOpen(false)
@@ -260,7 +264,7 @@ export default function App() {
           <ProtectedRoute isLoggedIn={isLoggedIn} element={
             <>
               <Header isLoggedIn={isLoggedIn} />
-              <SearchForm onSearch={handleSearchMovies} movieList={movieList} movieListFiltred={visibleMovieList} onCheckbox={handleFilterMovies}/>
+              <SearchForm onSearch={handleSearchMovies} movieList={movieList} movieListFiltred={visibleMovieList} onCheckbox={handleFilterMovies} storageName={FILTRED_MOVIES} />
               <MoviesCardList
                 movieList={visibleMovieList}
                 showMovieList={showMovieList} 
@@ -270,6 +274,7 @@ export default function App() {
                 switchLikeMovie={switchLikeMovie}
                 isVisibleButton={isVisibleButtonMovies}
                 storageName={FILTRED_MOVIES}
+                isLoading={isLoading}
                 />
               <Footer />
             </>
@@ -280,7 +285,7 @@ export default function App() {
           <ProtectedRoute isLoggedIn={isLoggedIn} element={
             <>
               <Header isLoggedIn={isLoggedIn} />
-              <SearchForm onSearch={handleSearchMovies} movieList={savedMovieList} movieListFiltred={savedFiltredMovieList} onCheckbox={handleFilterMovies}/>
+              <SearchForm onSearch={handleSearchMovies} movieList={savedMovieList} movieListFiltred={savedFiltredMovieList} onCheckbox={handleFilterMovies} storageName={FILTRED_SAVED_MOVIES} />
               <MoviesCardList 
                 movieList={savedFiltredMovieList} 
                 savedMovieList={savedMovieList} 
@@ -289,6 +294,7 @@ export default function App() {
                 handleShowButton={handleShowButton}
                 isVisibleButton={isVisibleButtonSaved}
                 storageName={FILTRED_SAVED_MOVIES}
+                isLoading={isLoading}
               />
               <Footer />
             </>

@@ -28,29 +28,31 @@ export default function MoviesCardList({ showMovieList, showSavedMovieList, ...p
   return (
     <>
       {isEmptyStorage ? 
-        (
-          props.movieList.length > NULL_FILM 
-          ? (
-              <>
-                <section className='movies-list'>
-                  {props.movieList.map((item) => <MoviesCard 
-                    key={item.nameRU} 
-                    movie={item} 
-                    onSave={props.handleSavedMovie} 
-                    savedMovieList={props.savedMovieList} 
-                    onLike={props.switchLikeMovie} 
-                    onDelete={props.handleDeleteMovie}
-                  />)}
-                </section>
-                <section className='movies-render'>
-                  {props.isVisibleButton &&
-                    <button type='button' className='movies-render__button' onClick={handleShowButton}>Ещё</button>
-                  }
-                </section>
-              </>
-            )
-          : ( <h1 className='movies-title'>Ничего не найдено</h1> )
+        (props.isLoading ?
+          <Preloader />
+          : (props.movieList.length > NULL_FILM 
+            ? (
+                <>
+                  <section className='movies-list'>
+                    {props.movieList.map((item) => <MoviesCard 
+                      key={item.nameRU} 
+                      movie={item} 
+                      onSave={props.handleSavedMovie} 
+                      savedMovieList={props.savedMovieList} 
+                      onLike={props.switchLikeMovie} 
+                      onDelete={props.handleDeleteMovie}
+                    />)}
+                  </section>
+                  <section className='movies-render'>
+                    {props.isVisibleButton &&
+                      <button type='button' className='movies-render__button' onClick={handleShowButton}>Ещё</button>
+                    }
+                  </section>
+                </>
+              )
+            : ( <h1 className='movies-title'>Ничего не найдено</h1> )
           )
+        )
         : (
           <h1 className='movies-title'>Фильмов нет</h1>
         )
