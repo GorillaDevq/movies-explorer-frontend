@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { FILTRED_MOVIES, FILTRED_SAVED_MOVIES } from "../constants/constants";
+import { FILTRED_MOVIES, FILTRED_SAVED_MOVIES, SHORT_FILM_DURATION, NULL_FILM } from "../constants/constants";
 
 export default function useSearchMovies(moviesPerRows) {
   const location = useLocation();
@@ -15,12 +15,12 @@ export default function useSearchMovies(moviesPerRows) {
   const handleFilterResult = (filtredMovies) => {
     if (location.pathname === '/movies') {
       localStorage.setItem(FILTRED_MOVIES, JSON.stringify(filtredMovies));
-      setVisibleMovieList(filtredMovies.slice(0, moviesPerRows))
+      setVisibleMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows))
       if (filtredMovies.length > moviesPerRows) setVisibleButtonMovies(true);
       else setVisibleButtonMovies(false);
     } else {
       localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify(filtredMovies));
-      setSavedFiltredMovieList(filtredMovies.slice(0, moviesPerRows));
+      setSavedFiltredMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows));
       if (filtredMovies.length > moviesPerRows) setVisibleButtonSaved(true);
       else setVisibleButtonSaved(false);
     }
@@ -32,7 +32,7 @@ export default function useSearchMovies(moviesPerRows) {
     const filtredMovies = arrayMovies.filter((movie) => {
       const movieNameLowerCase = movie.nameRU.toLowerCase();
       if (checkbox) {
-        return movieNameLowerCase.includes(searchLowerCase) && movie.duration <= 40
+        return movieNameLowerCase.includes(searchLowerCase) && movie.duration <= SHORT_FILM_DURATION
       }
       else {
         return movieNameLowerCase.includes(searchLowerCase)
@@ -44,7 +44,7 @@ export default function useSearchMovies(moviesPerRows) {
   const handleFilterMovies = (arrayMovies, checkbox) => {
     const filtredMovies = arrayMovies.filter((movie) => {
       if (checkbox) {
-        return movie.duration <= 40
+        return movie.duration <= SHORT_FILM_DURATION
       }
       else {
         return movie

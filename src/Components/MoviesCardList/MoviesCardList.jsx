@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import Preloader from "../Preloader/Preloader"
 import MoviesCard from "../MoviesCard/MoviesCard"
 
+import { NULL_FILM } from "../../utils/constants/constants"
+
 import './MoviesCardList.css'
 
 export default function MoviesCardList({ showMovieList, showSavedMovieList, ...props}) {
@@ -27,7 +29,7 @@ export default function MoviesCardList({ showMovieList, showSavedMovieList, ...p
     <>
       {isEmptyStorage ? 
         (
-          props.movieList.length > 0 
+          props.movieList.length > NULL_FILM 
           ? (
               <>
                 <section className='movies-list'>

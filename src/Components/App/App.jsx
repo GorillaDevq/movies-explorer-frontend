@@ -30,6 +30,8 @@ import {
   FILTRED_MOVIES, 
   FILTRED_SAVED_MOVIES,
   VALIDATION_ERROR_MESSAGE,
+  NULL_FILM,
+  VALIDATION_ERROR,
 } from '../../utils/constants/constants';
 
 export default function App() {
@@ -71,7 +73,7 @@ export default function App() {
     let filtredMovies = localStorage.getItem(FILTRED_MOVIES)
     if (filtredMovies) {
       filtredMovies = JSON.parse(filtredMovies);
-      setVisibleMovieList(filtredMovies.slice(0, moviesPerRows))
+      setVisibleMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows))
       if (filtredMovies.length > moviesPerRows) setVisibleButtonMovies(true);
       else setVisibleButtonMovies(false);
     }
@@ -89,7 +91,7 @@ export default function App() {
       const response = await mainApi.getSavedMovie();
       setSavedMovieList(response);
       localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify(response));
-      setSavedFiltredMovieList(response.slice(0, moviesPerRows));
+      setSavedFiltredMovieList(response.slice(NULL_FILM, moviesPerRows));
       if (response.length > moviesPerRows) setVisibleButtonSaved(true);
       else setVisibleButtonSaved(false);
     } catch(err) {
@@ -179,7 +181,7 @@ export default function App() {
       setCurrentUser(response);
       setErrorMessage('');
     } catch (err) {
-      if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
+      if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
     }
   }
@@ -193,7 +195,7 @@ export default function App() {
       navigate('/movies', {replace: true});
       localStorage.setItem('isLogedIn', JSON.stringify(true));
     } catch (err) {
-      if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
+      if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
     }
   }
@@ -208,7 +210,7 @@ export default function App() {
       navigate('/movies', {replace: true});
       localStorage.setItem('isLogedIn', JSON.stringify(true));
     } catch (err) {
-      if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
+      if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
     }
   }

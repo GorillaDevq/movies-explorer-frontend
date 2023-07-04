@@ -1,5 +1,19 @@
 import { useState, useEffect } from "react";
 
+import { 
+  DESKTOP_WIDTH, 
+  LAPTOP_WIDTH,
+  MAX_PHONE_WIDTH,
+  MIN_PHONE_WIDTH,
+  DESKTOP_MOVIES_PER_ROWS,
+  DESKTOP_MOVIES_ADD,
+  LAPTOP_MOVIES_PER_ROWS,
+  LAPTOP_MOVIES_ADD,
+  PHONE_MOVIES_PER_ROWS,
+  PHONE_MOVIES_ADD,
+  RESIZE_TIMER,
+} from "../constants/constants";
+
 export default function useWindowInnerWidth() {
   // Стейты для отрисовки количества Фильмов
   const [moviesPerRows, setMoviesPerRows] = useState(0);
@@ -10,23 +24,23 @@ export default function useWindowInnerWidth() {
     resizeTimer = setTimeout(() => {
     const screenWidth = window.innerWidth;
 
-    let movies = 3;
-    let moviesAdd = 1;
-    if (screenWidth >= 1280) {
-      movies = 12;
-      moviesAdd = 3;
-    } else if (screenWidth >= 768) {
-      movies = 8;
-      moviesAdd = 2;
+    let movies;
+    let moviesAdd;
+    if (screenWidth >= DESKTOP_WIDTH) {
+      movies = DESKTOP_MOVIES_PER_ROWS;
+      moviesAdd = DESKTOP_MOVIES_ADD;
+    } else if (screenWidth >= LAPTOP_WIDTH) {
+      movies = LAPTOP_MOVIES_PER_ROWS;
+      moviesAdd = LAPTOP_MOVIES_ADD;
     }
-    else if (screenWidth >= 310 && screenWidth <= 500) {
-      movies = 5;
-      moviesAdd = 1;
+    else if (screenWidth >= MIN_PHONE_WIDTH && screenWidth <= MAX_PHONE_WIDTH) {
+      movies = PHONE_MOVIES_PER_ROWS;
+      moviesAdd = PHONE_MOVIES_ADD;
     }
 
     setMoviesPerRows(movies);
     setMoviesPerAdd(moviesAdd);
-    }, 250)
+    }, RESIZE_TIMER)
   };
 
   // Монтирование и размонтирование
