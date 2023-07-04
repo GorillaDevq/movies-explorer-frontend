@@ -147,31 +147,28 @@ export default function App() {
   }
 
   // Получение данных для контекста
-  const handleCheckLogin = useCallback(async () => {
+  const handleGetUserInfo = useCallback(async () => {
     if (isLoggedIn) {
       try {
         const response = await mainApi.getUserInfo();
         setCurrentUser(response);
-      } catch (err) {
-        console.log(err);
+      } catch (err) { 
+        if (err.message === 'Ошибка авторизации.') setLoggedIn(false)
+        else console.log(err);
       }
     }
   }, [isLoggedIn])
 
   // Проверка токена в куках
   const handleCheckToken = useCallback(async () => {
-    if (!isLoggedIn) {
-      try {
-        await mainApi.checkToken();
-        setLoggedIn(true);
-        if (location.pathname === '/signin' || location.pathname === '/signup' || location.pathname === '/') {
-          navigate('/movies');
-        }
-      } catch(err) {
-        console.log(err);
-      }
-    } 
-  }, [isLoggedIn, navigate, location.pathname])
+    try {
+      await mainApi.checkToken();
+      setLoggedIn(true);
+    } catch(err) {
+      setLoggedIn(false);
+      console.log(err);
+    }
+  }, [])
 
   // Редактирование профиля API
   const handleUpdateUser = async (userData) => {
@@ -194,6 +191,7 @@ export default function App() {
       setLoggedIn(true);
       setErrorMessage('');
       navigate('/movies', {replace: true});
+      localStorage.setItem('isLogedIn', JSON.stringify(true));
     } catch (err) {
       if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
@@ -208,6 +206,7 @@ export default function App() {
       setLoggedIn(true);
       setErrorMessage('');
       navigate('/movies', {replace: true});
+      localStorage.setItem('isLogedIn', JSON.stringify(true));
     } catch (err) {
       if (err.statusCode === 400) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
@@ -219,7 +218,9 @@ export default function App() {
     try {
       await mainApi.logOut();
       setLoggedIn(false);
-      navigate('/signin')
+      localStorage.removeItem('isLogedIn');
+      setCurrentUser({})
+      navigate('/signin', { replace: true });
     } catch (err) {
       console.log(err);
     }
@@ -228,8 +229,8 @@ export default function App() {
   const handleClosePopup = () => setOpen(false)
 
   useEffect(() => {
-    handleCheckLogin();
-  }, [handleCheckLogin])
+    handleGetUserInfo();
+  }, [handleGetUserInfo])
 
   useEffect(() => {
     handleCheckToken()
@@ -298,9 +299,9 @@ export default function App() {
             </>
           }/>
         }/>
-        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} onSetError={setErrorMessage} /> }/>
-        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} onSetError={setErrorMessage} /> }/>
-        <Route path='*' element={ <NotFound /> }/>
+        <Route path='/signin' element={ <AuthForm onSubmit={handleSignIn} errorMessage={errorMessage} onSetError={setErrorMessage} isLoggedIn={isLoggedIn} /> }/>
+        <Route path='/signup' element={ <AuthForm onSubmit={handleSignUp} errorMessage={errorMessage} onSetError={setErrorMessage} isLoggedIn={isLoggedIn} /> }/>
+        <Route path='*' element={ <NotFound isLoggedIn={isLoggedIn} /> }/>
       </Routes>
     </CurrentUserContext.Provider>
   );

@@ -1,5 +1,6 @@
 // Библиотеки реакт
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 // Кастомные хуки
 import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
 import { useEmptyValidation } from '../../utils/hooks/useInputWithValidation';
@@ -7,8 +8,9 @@ import { useEmptyValidation } from '../../utils/hooks/useInputWithValidation';
 // Стили
 import './AuthForm.css'
 
-export default function AuthForm({ onSetError, ...props }) {
+export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
@@ -30,6 +32,12 @@ export default function AuthForm({ onSetError, ...props }) {
   }
 
   const handleChangeError = () => onSetError('')
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(-1)
+    }
+  })
 
   return (
     <section className='authorization'>

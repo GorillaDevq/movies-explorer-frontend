@@ -66,7 +66,7 @@ class MainApi {
   }
 
   checkToken() {
-    return this._makeRequest(`${this._baseUrl}/token`, 'GET')
+    return this._makeRequest(`${this._baseUrl}/token`, 'POST', {})
   }
 }
 
