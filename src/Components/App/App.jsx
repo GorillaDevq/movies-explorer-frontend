@@ -207,8 +207,8 @@ export default function App() {
       await mainApi.signIn(userData);
       setLoggedIn(true);
       setErrorMessage('');
-      navigate('/movies', {replace: true});
       localStorage.setItem('isLogedIn', JSON.stringify(true));
+      navigate('/movies', {replace: true});
     } catch (err) {
       if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 // Кастомные хуки
 import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
-import { useEmptyValidation } from '../../utils/hooks/useInputWithValidation';
+import { useEmptyValidation, useRegexNameValidation, useRegexEmailValidation } from '../../utils/hooks/useInputWithValidation';
 
 // Стили
 import './AuthForm.css'
@@ -14,14 +14,18 @@ export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
 
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
+  // Стейт для регулярного выражения
+  const isValidNameRegex = useRegexNameValidation(values.name);
+  const { isErrorEmailRegex, handleChangeEmail }  = useRegexEmailValidation(values.email);
+
   // Стейты для проверки isEmptyInput
   const isEmptyEmail = useEmptyValidation(values.email);
   const isEmptyName = useEmptyValidation(values.name);  
   const isEmptyPassword = useEmptyValidation(values.password);
   
   // Проверки для className 
-  const isValidSignIn = isValid && isEmptyEmail && isEmptyPassword
-  const isValidSignUp = isValidSignIn && isEmptyName
+  const isValidSignIn = isValid && isEmptyEmail && isEmptyPassword && (isErrorEmailRegex === '')
+  const isValidSignUp = isValidSignIn && isEmptyName && (isValidNameRegex === '')
 
   // Отправка данных для регистрации или логина
   const handleSubmitForm = (evt) => {
@@ -29,6 +33,12 @@ export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
     if (isValid) {
       props.onSubmit(values)  
     }
+  }
+
+  const onChangeEmail = (evt) => {
+    console.log(evt.target.value)
+    handleChangeEmail(evt);
+    handleChange(evt);
   }
 
   const handleChangeError = () => onSetError('')
@@ -59,12 +69,14 @@ export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
               <label className='form__label'>Имя</label>
               <input className={`form__input ${errors.name && `form__input_active`}`} name='name' type='text' placeholder='Введите имя' required onChange={handleChange} minLength={2} maxLength={16} value={values.name || ''} />
               {errors.name && <span className='form__error'>{errors.name}</span>}
+              {isValidNameRegex && <span className='form__error'>{isValidNameRegex}</span>}
             </li>
           }
           <li className='form__item'>
             <label className='form__label'>Email</label>
-            <input className={`form__input ${errors.email && `form__input_active`}`} name='email' type='email' placeholder='Введите email' required onChange={handleChange} value={values.email || ''} />
+            <input className={`form__input ${errors.email && `form__input_active`}`} name='email' type='text' placeholder='Введите email' required onChange={onChangeEmail} value={values.email || ''} />
             {errors.email && <span className='form__error'>{errors.email}</span>}
+            {isErrorEmailRegex && <span className='form__error'>{isErrorEmailRegex}</span>}
           </li>
           <li className='form__item'>
             <label className='form__label'>Пароль</label>
