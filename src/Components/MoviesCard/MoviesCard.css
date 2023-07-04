@@ -23,6 +23,8 @@
   flex-direction: column;
   justify-content: space-between;
   list-style: none;
+  min-height: 77px;
+  box-sizing: border-box;
   padding: 16px;
   margin: 0;
   flex-grow: 1;
@@ -104,7 +106,6 @@
   .movie__during {
     font-size: 10px;
     line-height: 12px;
-    margin-top: 14px;
   }
 
   .movie__item_type_like {

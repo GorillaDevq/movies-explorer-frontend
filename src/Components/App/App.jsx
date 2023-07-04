@@ -32,6 +32,7 @@ import {
   VALIDATION_ERROR_MESSAGE,
   NULL_FILM,
   VALIDATION_ERROR,
+  IS_LOGGED_IN,
 } from '../../utils/constants/constants';
 
 export default function App() {
@@ -192,8 +193,8 @@ export default function App() {
       await mainApi.signUp(userData);
       setLoggedIn(true);
       setErrorMessage('');
+      localStorage.setItem(IS_LOGGED_IN, JSON.stringify(true));
       navigate('/movies', {replace: true});
-      localStorage.setItem('isLogedIn', JSON.stringify(true));
     } catch (err) {
       if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
       else setErrorMessage(err.message);
@@ -207,7 +208,7 @@ export default function App() {
       await mainApi.signIn(userData);
       setLoggedIn(true);
       setErrorMessage('');
-      localStorage.setItem('isLogedIn', JSON.stringify(true));
+      localStorage.setItem(IS_LOGGED_IN, JSON.stringify(true));
       navigate('/movies', {replace: true});
     } catch (err) {
       if (err.statusCode === VALIDATION_ERROR) setErrorMessage(VALIDATION_ERROR_MESSAGE);
@@ -220,7 +221,9 @@ export default function App() {
     try {
       await mainApi.logOut();
       setLoggedIn(false);
-      localStorage.removeItem('isLogedIn');
+      localStorage.removeItem(IS_LOGGED_IN);
+      localStorage.removeItem(FILTRED_MOVIES);
+      localStorage.removeItem(FILTRED_SAVED_MOVIES);
       setCurrentUser({})
       navigate('/signin', { replace: true });
     } catch (err) {

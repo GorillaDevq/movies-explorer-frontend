@@ -21,7 +21,6 @@ export default function SearchForm(props) {
   const handleSubmitSearch = (evt) => {
     evt.preventDefault();
     props.onSearch(searchValue, isChecked, props.movieList);
-    setSearchValue('')
   }
 
   useEffect(() => {

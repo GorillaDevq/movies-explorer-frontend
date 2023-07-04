@@ -36,7 +36,6 @@ export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
   }
 
   const onChangeEmail = (evt) => {
-    console.log(evt.target.value)
     handleChangeEmail(evt);
     handleChange(evt);
   }

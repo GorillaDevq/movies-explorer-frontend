@@ -1,5 +1,6 @@
 const FILTRED_MOVIES = 'filtredMovies';
 const FILTRED_SAVED_MOVIES = 'filtredSavedMovies';
+const IS_LOGGED_IN = 'isLogedIn';
 
 const VALIDATION_ERROR = 400;
 const VALIDATION_ERROR_MESSAGE = 'Некорректно заполнено поле email';
@@ -46,4 +47,5 @@ export { FILTRED_MOVIES,
   RESIZE_TIMER,
   EMAIL_REGEX,
   NAME_REGEX,
+  IS_LOGGED_IN,
 }
