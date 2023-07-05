@@ -3,10 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import { FILTRED_MOVIES, FILTRED_SAVED_MOVIES, SHORT_FILM_DURATION, NULL_FILM } from "../constants/constants";
 
-export default function useSearchMovies(moviesPerRows) {
+export default function useSearchMovies(moviesPerRows, setLoading) {
   const location = useLocation();
-
-  const [isLoading, setLoading] = useState(false);
 
   const [visibleMovieList, setVisibleMovieList] = useState([]);
   const [isVisibleButtonMovies, setVisibleButtonMovies] = useState(false);
@@ -41,12 +39,12 @@ export default function useSearchMovies(moviesPerRows) {
       else {
         return movieNameLowerCase.includes(searchLowerCase)
       }
-    }) 
+    })
     handleFilterResult(filtredMovies, checkbox, search)
   }
 
   const handleFilterMovies = (arrayMovies, checkbox, search) => {
-    setLoading(true)
+    setLoading(true);
     const filtredMovies = arrayMovies.filter((movie) => {
       if (checkbox) {
         return movie.duration <= SHORT_FILM_DURATION
@@ -68,6 +66,5 @@ export default function useSearchMovies(moviesPerRows) {
     setSavedFiltredMovieList,
     isVisibleButtonSaved,
     setVisibleButtonSaved,
-    isLoading
   }
 }

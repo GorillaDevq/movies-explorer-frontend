@@ -56,6 +56,8 @@ export default function App() {
 
   // Стейты для отрисовки количества Фильмов
   const { moviesPerRows, moviesPerAdd } = useWindowInnerWidth()
+  const [isLoading, setLoading] = useState(false)
+
 
   const { handleSearchMovies, 
     handleFilterMovies, 
@@ -67,8 +69,7 @@ export default function App() {
     setSavedFiltredMovieList,
     isVisibleButtonSaved,
     setVisibleButtonSaved,
-    isLoading,
-  } = useSearchMovies(moviesPerRows)
+  } = useSearchMovies(moviesPerRows, setLoading)
 
   // Получение всех фильмов API
   const showMovieList = useCallback(async () => {
@@ -84,6 +85,8 @@ export default function App() {
       setMovieList(response)
     } catch(err) {
       console.log(err)
+    } finally {
+      setLoading(false)
     }
   }, [moviesPerRows, setVisibleMovieList, setVisibleButtonMovies])
 
@@ -98,7 +101,9 @@ export default function App() {
       else setVisibleButtonSaved(false);
     } catch(err) {
       console.log(err);
-    } 
+    } finally {
+      setLoading(false)
+    }
   }, [moviesPerRows, setSavedFiltredMovieList, setVisibleButtonSaved])
 
   // Отображение кнопки "Ещё"
@@ -274,6 +279,7 @@ export default function App() {
                 isVisibleButton={isVisibleButtonMovies}
                 storageName={FILTRED_MOVIES}
                 isLoading={isLoading}
+                setLoading={setLoading}
                 />
               <Footer />
             </>
@@ -294,6 +300,7 @@ export default function App() {
                 isVisibleButton={isVisibleButtonSaved}
                 storageName={FILTRED_SAVED_MOVIES}
                 isLoading={isLoading}
+                setLoading={setLoading}
               />
               <Footer />
             </>
