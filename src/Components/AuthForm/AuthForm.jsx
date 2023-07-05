@@ -12,7 +12,7 @@ export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   // Стейт для регулярного выражения
   const isValidNameRegex = useRegexNameValidation(values.name);
@@ -48,6 +48,12 @@ export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
     }
   }, [isLoggedIn, navigate])
 
+  useEffect(() => {
+    if (location.pathname) {
+      resetForm()
+    }
+  }, [location.pathname, resetForm])
+
   return (
     <section className='authorization'>
       <Link to={'/'} className='authorization__link'>
@@ -66,7 +72,7 @@ export default function AuthForm({ isLoggedIn, onSetError, ...props }) {
           {(location.pathname) === '/signup' &&
             <li className='form__item'>
               <label className='form__label'>Имя</label>
-              <input className={`form__input ${errors.name && `form__input_active`}`} name='name' type='text' placeholder='Введите имя' required onChange={handleChange} minLength={2} maxLength={16} value={values.name || ''} />
+              <input className={`form__input ${errors.name && `form__input_active`}`} name='name' type='text' placeholder='Введите имя' required onChange={handleChange} minLength={2} maxLength={30} value={values.name || ''} />
               {errors.name && <span className='form__error'>{errors.name}</span>}
               {isValidNameRegex && <span className='form__error'>{isValidNameRegex}</span>}
             </li>

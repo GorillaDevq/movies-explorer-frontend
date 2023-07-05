@@ -223,7 +223,7 @@ export default function App() {
       .then(() => {
         localStorage.clear();
         setLoggedIn(false);
-        setCurrentUser({})
+        setCurrentUser({});
       })
       .then(() => {
         navigate('/signin');

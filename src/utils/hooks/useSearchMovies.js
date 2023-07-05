@@ -6,7 +6,7 @@ import { FILTRED_MOVIES, FILTRED_SAVED_MOVIES, SHORT_FILM_DURATION, NULL_FILM } 
 export default function useSearchMovies(moviesPerRows) {
   const location = useLocation();
 
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
 
   const [visibleMovieList, setVisibleMovieList] = useState([]);
   const [isVisibleButtonMovies, setVisibleButtonMovies] = useState(false);

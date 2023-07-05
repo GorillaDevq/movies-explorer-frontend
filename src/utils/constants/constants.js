@@ -25,7 +25,7 @@ const PHONE_MOVIES_ADD = 1;
 
 const RESIZE_TIMER = 250;
 
-const EMAIL_REGEX= /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX= /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const NAME_REGEX = /^[a-zA-Zа-яА-Я\s-]+$/;
 
 export { FILTRED_MOVIES, 

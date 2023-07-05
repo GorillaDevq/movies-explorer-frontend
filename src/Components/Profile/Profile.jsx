@@ -50,7 +50,7 @@ export default function Profile({ onSetError , ...props}) {
       <form className='profile__form' onSubmit={onSubmitForm}>
         <fieldset className='profile__field'>
           <label className='profile__label'>Имя</label>
-          <input type='text' className='profile__input' placeholder='Введите имя' name='name' value={values.name || ''} onChange={handleChange} required/>
+          <input type='text' className='profile__input' placeholder='Введите имя' name='name' value={values.name || ''} onChange={handleChange} minLength={2} maxLength={30} required/>
           {errors.name && <span className='profile__error'>{errors.name}</span>}
           {isValidNameRegex && <span className='profile__error'>{isValidNameRegex}</span>}
         </fieldset>
