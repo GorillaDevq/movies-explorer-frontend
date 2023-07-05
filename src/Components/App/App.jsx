@@ -92,7 +92,7 @@ export default function App() {
     try {
       const response = await mainApi.getSavedMovie();
       setSavedMovieList(response);
-      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify({ movies: response, checkbox: false}));
+      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify({ movies: response, checkbox: false, searchValue: ''}));
       setSavedFiltredMovieList(response.slice(NULL_FILM, moviesPerRows));
       if (response.length > moviesPerRows) setVisibleButtonSaved(true);
       else setVisibleButtonSaved(false);
@@ -226,7 +226,7 @@ export default function App() {
         setCurrentUser({});
       })
       .then(() => {
-        navigate('/signin');
+        navigate('/');
       })
       .catch((err) => {
         console.log(err);

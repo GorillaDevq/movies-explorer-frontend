@@ -17,7 +17,7 @@ export default function SearchForm({storageName ,...props}) {
     const movies = JSON.parse(storage);
     const { checked } = evt.target
     setIsChecked(checked)
-    props.onCheckbox(movies.movies, checked)
+    props.onCheckbox(movies.movies, checked, searchValue)
   };
 
   const handleSubmitSearch = (evt) => {
@@ -31,8 +31,11 @@ export default function SearchForm({storageName ,...props}) {
       const storage = localStorage.getItem(storageName);
       if (storage) {
         const movies = JSON.parse(storage);
-        setIsChecked(movies.checkbox)
+        setIsChecked(movies.checkbox);
+        if (location.pathname === '/movies') setSearchValue(movies.searchValue);
+        return
       }
+      return
     }
   }, [location.pathname, storageName])
 

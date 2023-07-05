@@ -14,24 +14,24 @@ export default function useSearchMovies(moviesPerRows) {
   const [savedFiltredMovieList, setSavedFiltredMovieList] = useState([]);
   const [isVisibleButtonSaved, setVisibleButtonSaved] = useState(false);
 
-  const handleFilterResult = (filtredMovies , checkbox) => {
+  const handleFilterResult = (filtredMovies , checkbox, search) => {
     if (location.pathname === '/movies') {
-      localStorage.setItem(FILTRED_MOVIES, JSON.stringify({movies: filtredMovies, checkbox: checkbox}));
+      localStorage.setItem(FILTRED_MOVIES, JSON.stringify({movies: filtredMovies, checkbox: checkbox, searchValue: search}));
       setVisibleMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows))
       if (filtredMovies.length > moviesPerRows) setVisibleButtonMovies(true);
       else setVisibleButtonMovies(false);
     } else {
-      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify({movies: filtredMovies, checkbox: checkbox}));
+      localStorage.setItem(FILTRED_SAVED_MOVIES, JSON.stringify({movies: filtredMovies, checkbox: checkbox, searchValue: search}));
       setSavedFiltredMovieList(filtredMovies.slice(NULL_FILM, moviesPerRows));
       if (filtredMovies.length > moviesPerRows) setVisibleButtonSaved(true);
       else setVisibleButtonSaved(false);
     }
-    setLoading(false)
+    setLoading(false);
     return
   }
 
   const handleSearchMovies = (search, checkbox, arrayMovies) => {
-    setLoading(true)
+    setLoading(true);
     const searchLowerCase = search.toLowerCase();
     const filtredMovies = arrayMovies.filter((movie) => {
       const movieNameLowerCase = movie.nameRU.toLowerCase();
@@ -42,10 +42,11 @@ export default function useSearchMovies(moviesPerRows) {
         return movieNameLowerCase.includes(searchLowerCase)
       }
     }) 
-    handleFilterResult(filtredMovies, checkbox)
+    handleFilterResult(filtredMovies, checkbox, search)
   }
 
-  const handleFilterMovies = (arrayMovies, checkbox) => {
+  const handleFilterMovies = (arrayMovies, checkbox, search) => {
+    setLoading(true);
     const filtredMovies = arrayMovies.filter((movie) => {
       if (checkbox) {
         return movie.duration <= SHORT_FILM_DURATION
@@ -54,7 +55,7 @@ export default function useSearchMovies(moviesPerRows) {
         return movie
       }
     })
-    handleFilterResult(filtredMovies, checkbox)
+    handleFilterResult(filtredMovies, checkbox, search)
   }
 
   return { handleSearchMovies, 
