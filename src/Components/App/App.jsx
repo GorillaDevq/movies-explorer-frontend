@@ -221,12 +221,14 @@ export default function App() {
   const handleLogOut = () => {
     mainApi.logOut()
       .then(() => {
+        navigate('/');
         localStorage.clear();
         setLoggedIn(false);
         setCurrentUser({});
-      })
-      .then(() => {
-        navigate('/');
+        setSavedMovieList([]);
+        setVisibleMovieList([]);
+        setMovieList([]);
+        setSavedFiltredMovieList([]);
       })
       .catch((err) => {
         console.log(err);
