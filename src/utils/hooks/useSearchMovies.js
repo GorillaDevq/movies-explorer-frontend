@@ -46,7 +46,7 @@ export default function useSearchMovies(moviesPerRows) {
   }
 
   const handleFilterMovies = (arrayMovies, checkbox, search) => {
-    setLoading(true);
+    setLoading(true)
     const filtredMovies = arrayMovies.filter((movie) => {
       if (checkbox) {
         return movie.duration <= SHORT_FILM_DURATION
