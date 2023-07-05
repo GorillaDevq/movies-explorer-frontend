@@ -12,7 +12,6 @@ export default function MoviesCardList({ setLoading, showMovieList, showSavedMov
   const location = useLocation();
     
   const isEmptyStorage = localStorage.getItem(props.storageName)
-  console.log(props.isLoading)
 
   useEffect(() => {
     if (location.pathname === '/movies') {
