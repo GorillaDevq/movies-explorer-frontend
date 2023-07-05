@@ -149,7 +149,6 @@ export default function App() {
       handleDeleteMovie(_id);
     }
   }
-
   // Получение данных для контекста
   const handleGetUserInfo = useCallback(async () => {
     if (isLoggedIn) {
@@ -247,9 +246,6 @@ export default function App() {
 
   useEffect(() => {
     setErrorMessage('')
-    if (localStorage.getItem('isLogedIn')) {
-      setLoggedIn(true)
-    }
   }, [])
 
   return (

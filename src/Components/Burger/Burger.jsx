@@ -15,7 +15,9 @@ export default function Burger() {
         <nav className='burger__navigation'>
           <button className='burger__close' onClick={() => setBurger((prevState) => !prevState)}></button>
           <ul className='burger__list'>
-            <li className='burger__item'><Link className='burger__link'>Главная</Link></li>
+            <li className='burger__item'>
+              <Link className={`burger__link ${(location.pathname === '/') ? 'burger__link_active' : ''}`} to={'/'}>Главная</Link>
+            </li>
             <li className='burger__item'>
               <Link className={`burger__link ${(location.pathname === '/movies') ? 'burger__link_active' : ''}`} to={'/movies'}>Фильмы</Link>
             </li>

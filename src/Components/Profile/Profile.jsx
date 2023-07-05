@@ -63,7 +63,7 @@ export default function Profile({ onSetError , ...props}) {
         {props.errorMessage && <span className='profile__error profile__error_type_submit'>{props.errorMessage}</span>}
         <button type='submit' className={`profile__submit ${isValidUpdate ? `` : `profile__submit_disabled`}`}>Редактировать</button>
       </form>
-      <Link to={'/signin'} className='profile__link' onClick={props.onLogOut}>Выйти из аккаунта</Link>
+      <Link to={'/'} className='profile__link' onClick={props.onLogOut}>Выйти из аккаунта</Link>
     </section>
   )
 }
