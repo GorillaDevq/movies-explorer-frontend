@@ -29,10 +29,6 @@
   position: relative;
 }
 
-.profile__field:not(:last-of-type) {
-  border-bottom: 1px solid #424242;
-}
-
 .profile__field:last-of-type {
   margin-bottom: 200px;
   margin-top: 16px;
@@ -54,10 +50,29 @@
   color: white;
   font-size: 11px;
   line-height: 13px;
+  border-bottom: 1px solid #424242;
+}
+
+.profile__input_type_last {
+  border-bottom: none;
 }
 
 .profile__input:focus {
   border-bottom: 1px solid white;
+}
+
+.profile__error {
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  margin-top: 6px;
+  transition: all 0.3s ease-in-out;
+  text-align: end;
+}
+
+.profile__error_type_submit {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .profile__submit {
@@ -69,10 +84,17 @@
   line-height: 16px;
   margin-bottom: 16px;
   padding: 0;
+  cursor: pointer;
 }
 
 .profile__submit:hover {
   opacity: 0.7;
+}
+
+.profile__submit_disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .profile__link {

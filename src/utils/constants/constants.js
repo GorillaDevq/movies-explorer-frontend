@@ -1,56 +1,51 @@
-const movieList = [
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
+const FILTRED_MOVIES = 'filtredMovies';
+const FILTRED_SAVED_MOVIES = 'filtredSavedMovies';
+const IS_LOGGED_IN = 'isLogedIn';
 
-]
+const VALIDATION_ERROR = 400;
+const VALIDATION_ERROR_MESSAGE = 'Некорректно заполнено поле email';
 
-const savedMovies = [
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
-  {
-    src: 'https://sun9-71.userapi.com/impg/_mybTv6EADP-9-cPnQNqf2e4VdSNQJlSm78_XQ/yvdQL3vzLoQ.jpg?size=364x203&quality=95&sign=910417a11f53be65c7efcccf8973ffbc&type=album',
-    alt: 'Фильм',
-    title: 'Киноальманах «100 лет дизайна»',
-    during: '1ч 3м'
-  },
-]
 
-export { movieList, savedMovies }
+const SHORT_FILM_DURATION = 40;
+const NULL_FILM = 0;
+
+const DESKTOP_WIDTH = 1280;
+const LAPTOP_WIDTH = 768;
+const MAX_PHONE_WIDTH = 500;
+const MIN_PHONE_WIDTH = 310;
+
+const DESKTOP_MOVIES_PER_ROWS = 12;
+const DESKTOP_MOVIES_ADD = 3;
+
+const LAPTOP_MOVIES_PER_ROWS = 8;
+const LAPTOP_MOVIES_ADD = 2;
+
+const PHONE_MOVIES_PER_ROWS = 5;
+const PHONE_MOVIES_ADD = 1;
+
+const RESIZE_TIMER = 250;
+
+const EMAIL_REGEX= /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+const NAME_REGEX = /^[a-zA-Zа-яА-Я\s-]+$/;
+
+export { FILTRED_MOVIES, 
+  FILTRED_SAVED_MOVIES,
+  VALIDATION_ERROR_MESSAGE,
+  SHORT_FILM_DURATION,
+  NULL_FILM,
+  VALIDATION_ERROR,
+  DESKTOP_WIDTH,
+  LAPTOP_WIDTH,
+  MAX_PHONE_WIDTH,
+  MIN_PHONE_WIDTH,
+  DESKTOP_MOVIES_PER_ROWS,
+  DESKTOP_MOVIES_ADD,
+  LAPTOP_MOVIES_PER_ROWS,
+  LAPTOP_MOVIES_ADD,
+  PHONE_MOVIES_PER_ROWS,
+  PHONE_MOVIES_ADD,
+  RESIZE_TIMER,
+  EMAIL_REGEX,
+  NAME_REGEX,
+  IS_LOGGED_IN,
+}

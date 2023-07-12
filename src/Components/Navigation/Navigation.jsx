@@ -10,7 +10,7 @@ export default function Navigation(props) {
   
   return (
     <>
-      {props.loggedIn
+      {props.isLoggedIn
         ?
         <>
           <nav className='navigation navigation_type_logged'>

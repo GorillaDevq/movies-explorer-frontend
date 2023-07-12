@@ -6,7 +6,7 @@ import './NotFound.css'
 export default function NotFound() {
   const navigate = useNavigate()
 
-  const handleGoBack = () => navigate(-1)
+  const handleGoBack = () => navigate(-1, { replace: true })
 
   return (
     <section className='not-found'>
